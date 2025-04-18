@@ -1,39 +1,28 @@
 const clientID = "479563869562-d4frmm9dfvajlv2ntb4u9i8vm2jmuthr.apps.googleusercontent.com";
-
 let googleAccountsClient;
 let accessToken = null;
 
-// Wait for both window load and Google API readiness
-window.addEventListener("load", () => {
-    // Retry logic if google isn't ready yet
-    function initializeGoogleClient() {
-        if (typeof google === "undefined" || !google.accounts || !google.accounts.oauth2) {
-            console.warn("Google API not ready yet. Retrying...");
-            setTimeout(initializeGoogleClient, 100); // retry after 100ms
-            return;
+// This gets called ONLY after Google's script is loaded
+function onGoogleScriptLoad() {
+    console.log("Google API script loaded");
+
+    googleAccountsClient = google.accounts.oauth2.initTokenClient({
+        client_id: clientID,
+        scope: "https://www.googleapis.com/auth/drive.file",
+        callback: (tokenResponse) => {
+            accessToken = tokenResponse.access_token;
+            console.log("Access Token:", accessToken);
+            alert("User authenticated successfully!");
+            document.getElementById("upload-section").classList.remove("hidden");
         }
+    });
 
-        // Now it's safe to initialize
-        googleAccountsClient = google.accounts.oauth2.initTokenClient({
-            client_id: clientID,
-            scope: "https://www.googleapis.com/auth/drive.file",
-            callback: (tokenResponse) => {
-                accessToken = tokenResponse.access_token;
-                console.log("Access Token:", accessToken);
-                alert("User authenticated successfully!");
-                document.getElementById("upload-section").classList.remove("hidden");
-            }
-        });
+    document.getElementById("auth-btn").addEventListener("click", () => {
+        googleAccountsClient.requestAccessToken();
+    });
 
-        document.getElementById("auth-btn").addEventListener("click", () => {
-            googleAccountsClient.requestAccessToken();
-        });
-
-        document.getElementById("upload-btn").addEventListener("click", uploadFile);
-    }
-
-    initializeGoogleClient(); // call on load
-});
+    document.getElementById("upload-btn").addEventListener("click", uploadFile);
+}
 
 function uploadFile() {
     const fileInput = document.getElementById("file-input");
