@@ -1,17 +1,10 @@
-// Ensure the DOM is fully loaded before adding event listeners
-document.addEventListener("DOMContentLoaded", () => {
-    const authButton = document.getElementById("auth-btn");
-    authButton.addEventListener("click", () => {
-        console.log("Authenticate button clicked via event listener");
-        authenticate(); // Call the authenticate function
-    });
-});
-
 // Initialize the Google Identity Services Client
 const clientID = "479563869562-d4frmm9dfvajlv2ntb4u9i8vm2jmuthr.apps.googleusercontent.com"; // Replace with your actual Client ID
 let googleAccountsClient;
 
-function loadGoogleAccounts() {
+// Ensure the DOM is fully loaded before adding event listeners
+document.addEventListener("DOMContentLoaded", () => {
+    // Initialize Google Accounts Client
     googleAccountsClient = google.accounts.oauth2.initTokenClient({
         client_id: clientID,
         scope: "https://www.googleapis.com/auth/drive.file",
@@ -20,15 +13,26 @@ function loadGoogleAccounts() {
             alert("User authenticated successfully!");
         }
     });
-}
+
+    // Event Listener for Authenticate button
+    const authButton = document.getElementById("auth-btn");
+    authButton.addEventListener("click", () => {
+        console.log("Authenticate button clicked");
+        authenticate();
+    });
+
+    // Event Listener for Upload button
+    const uploadButton = document.getElementById("upload-btn");
+    uploadButton.addEventListener("click", () => {
+        console.log("Upload button clicked");
+        uploadFile();
+    });
+});
 
 // Authenticate the user
 function authenticate() {
     console.log("Authenticate function called");
-    if (!googleAccountsClient) {
-        loadGoogleAccounts(); // Initialize Google Accounts if not already done
-    }
-    googleAccountsClient.requestAccessToken(); // Request access token from the user
+    googleAccountsClient.requestAccessToken();
 }
 
 // Upload file to Google Drive
@@ -67,12 +71,3 @@ function uploadFile() {
         console.error("Error uploading file:", JSON.stringify(error));
     });
 }
-
-// Add an event listener for the upload button
-document.addEventListener("DOMContentLoaded", () => {
-    const uploadButton = document.getElementById("upload-btn");
-    uploadButton.addEventListener("click", () => {
-        console.log("Upload button clicked");
-        uploadFile(); // Call the upload function
-    });
-});
