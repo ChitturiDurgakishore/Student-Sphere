@@ -1,6 +1,8 @@
-// Initialize the Google Identity Services Client
-const clientID = "479563869562-d4frmm9dfvajlv2ntb4u9i8vm2jmuthr.apps.googleusercontent.com"; // Replace with your actual Client ID
+// Your actual Client ID from Google Cloud Console
+const clientID = "479563869562-d4frmm9dfvajlv2ntb4u9i8vm2jmuthr.apps.googleusercontent.com";
+
 let googleAccountsClient;
+let accessToken = null;
 
 // Ensure the DOM is fully loaded before adding event listeners
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,8 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
         client_id: clientID,
         scope: "https://www.googleapis.com/auth/drive.file",
         callback: (tokenResponse) => {
-            console.log("Access Token:", tokenResponse.access_token);
+            accessToken = tokenResponse.access_token;
+            console.log("Access Token:", accessToken);
             alert("User authenticated successfully!");
+
+            // Show upload section after successful login
+            document.getElementById("upload-section").classList.remove("hidden");
         }
     });
 
@@ -45,12 +51,16 @@ function uploadFile() {
         return;
     }
 
+    if (!accessToken) {
+        alert("Please authenticate first.");
+        return;
+    }
+
     const metadata = {
         name: file.name,
         mimeType: file.type
     };
 
-    const accessToken = googleAccountsClient.accessToken; // Get the access token
     const form = new FormData();
     form.append("metadata", new Blob([JSON.stringify(metadata)], { type: "application/json" }));
     form.append("file", file);
@@ -68,6 +78,7 @@ function uploadFile() {
         alert("File uploaded successfully!");
     })
     .catch(error => {
-        console.error("Error uploading file:", JSON.stringify(error));
+        console.error("Error uploading file:", error);
+        alert("File upload failed.");
     });
 }
