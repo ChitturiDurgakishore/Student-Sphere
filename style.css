@@ -1,37 +1,53 @@
-/* styles.css */
+/* Global styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f5f5f5;
   text-align: center;
 }
 
+/* Header */
 header {
   background-color: #4CAF50;
   color: white;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
+/* Main content section */
 main {
   margin: 2rem auto;
   width: 90%;
   max-width: 600px;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
+/* Hide elements initially */
 .hidden {
   display: none;
 }
 
+/* Button styles */
 button {
   margin: 1rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
   color: white;
   background-color: #4CAF50;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
 }
 
 button:disabled {
@@ -39,7 +55,51 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* File input styles */
 input[type="file"] {
   margin: 1rem 0;
   font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fafafa;
+}
+
+/* Auth section */
+#auth-section {
+  padding: 2rem;
+}
+
+#auth-btn {
+  background-color: #4285F4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#auth-btn:hover {
+  background-color: #357ae8;
+}
+
+/* Upload section */
+#upload-section {
+  display: none;
+  padding: 2rem;
+}
+
+/* Footer */
+footer {
+  background-color: #4CAF50;
+  color: white;
+  padding: 1rem 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  text-align: center;
 }
