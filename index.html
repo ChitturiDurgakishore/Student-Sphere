@@ -1,43 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Material Sharing App</title>
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Load the Google Identity Services Client -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="script.js" defer></script>
-    
-    <style>
-        /* Basic inline style for visibility */
-        .hidden {
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Study Material Sharing App</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Load Google API with onload -->
+  <script
+    src="https://accounts.google.com/gsi/client"
+    onload="onGoogleScriptLoad()"
+    async
+    defer
+  ></script>
+
+  <!-- Your script -->
+  <script src="script.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Study Material Sharing App</h1>
-    </header>
-
-    <main>
-        <div id="auth-section">
-            <!-- Authenticate with Google -->
-            <button id="auth-btn">Authenticate with Google</button>
-        </div>
-
-        <div id="upload-section" class="hidden">
-            <h2>Upload Your Study Material</h2>
-            <!-- File Input for Upload -->
-            <input type="file" id="file-input">
-            <button id="upload-btn">Upload File</button>
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Study Material Sharing App</p>
-    </footer>
+  <header>
+    <h1>Study Material Sharing App</h1>
+  </header>
+  <main>
+    <div id="auth-section">
+      <button id="auth-btn">Authenticate with Google</button>
+    </div>
+    <div id="upload-section" class="hidden">
+      <h2>Upload Your Study Material</h2>
+      <input type="file" id="file-input">
+      <button id="upload-btn">Upload File</button>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 Study Material Sharing App</p>
+  </footer>
 </body>
 </html>
