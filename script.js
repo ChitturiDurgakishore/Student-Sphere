@@ -2,7 +2,6 @@ const clientID = "479563869562-d4frmm9dfvajlv2ntb4u9i8vm2jmuthr.apps.googleuserc
 let googleAccountsClient;
 let accessToken = null;
 let userName = '';
-
 // This gets called ONLY after Google's script is loaded
 function onGoogleScriptLoad() {
     console.log("Google API script loaded");
