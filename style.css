@@ -87,9 +87,32 @@ input[type="file"] {
   background-color: #357ae8;
 }
 
+/* Name section */
+#name-section {
+  padding: 2rem;
+}
+
+#name-input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin: 1rem 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#submit-name-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
 /* Upload section */
 #upload-section {
-  display: none;
   padding: 2rem;
 }
 
