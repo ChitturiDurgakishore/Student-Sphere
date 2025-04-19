@@ -7,7 +7,6 @@ body {
   text-align: center;
 }
 
-/* Header */
 header {
   background-color: #4CAF50;
   color: white;
@@ -17,7 +16,6 @@ header {
   font-weight: bold;
 }
 
-/* Main content section */
 main {
   margin: 2rem auto;
   width: 90%;
@@ -28,12 +26,10 @@ main {
   border-radius: 8px;
 }
 
-/* Hide elements initially */
 .hidden {
   display: none;
 }
 
-/* Button styles */
 button {
   margin: 1rem;
   padding: 0.8rem 1.5rem;
@@ -55,68 +51,26 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* File input styles */
-input[type="file"] {
-  margin: 1rem 0;
-  font-size: 1rem;
+input[type="text"],
+input[type="file"],
+select {
   padding: 0.5rem;
+  font-size: 1rem;
   border: 1px solid #ddd;
   border-radius: 5px;
   width: 100%;
-  box-sizing: border-box;
-  background-color: #fafafa;
+  margin-bottom: 1rem;
 }
 
-/* Auth section */
-#auth-section {
-  padding: 2rem;
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-#auth-btn {
-  background-color: #4285F4;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#auth-btn:hover {
-  background-color: #357ae8;
-}
-
-/* Name section */
-#name-section {
-  padding: 2rem;
-}
-
-#name-input {
-  padding: 0.5rem;
-  font-size: 1rem;
+ul li {
   margin: 1rem 0;
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 5px;
 }
 
-#submit-name-btn {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-/* Upload section */
-#upload-section {
-  padding: 2rem;
-}
-
-/* Footer */
 footer {
   background-color: #4CAF50;
   color: white;
