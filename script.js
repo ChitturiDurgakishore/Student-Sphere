@@ -1,6 +1,7 @@
 const clientID = "479563869562-d4frmm9dfvajlv2ntb4u9i8vm2jmuthr.apps.googleusercontent.com";
 let googleAccountsClient;
 let accessToken = null;
+let userName = '';
 
 // This gets called ONLY after Google's script is loaded
 function onGoogleScriptLoad() {
@@ -13,12 +14,24 @@ function onGoogleScriptLoad() {
             accessToken = tokenResponse.access_token;
             console.log("Access Token:", accessToken);
             alert("User authenticated successfully!");
-            document.getElementById("upload-section").classList.remove("hidden");
+            document.getElementById("auth-section").classList.add("hidden");
+            document.getElementById("name-section").classList.remove("hidden");
         }
     });
 
     document.getElementById("auth-btn").addEventListener("click", () => {
         googleAccountsClient.requestAccessToken();
+    });
+
+    document.getElementById("submit-name-btn").addEventListener("click", () => {
+        userName = document.getElementById("name-input").value;
+        if (userName) {
+            alert("Hello " + userName + "!");
+            document.getElementById("name-section").classList.add("hidden");
+            document.getElementById("upload-section").classList.remove("hidden");
+        } else {
+            alert("Please enter your name.");
+        }
     });
 
     document.getElementById("upload-btn").addEventListener("click", uploadFile);
@@ -40,7 +53,8 @@ function uploadFile() {
 
     const metadata = {
         name: file.name,
-        mimeType: file.type
+        mimeType: file.type,
+        parents: ['root'], // Optional: Add parent folder for organization
     };
 
     const form = new FormData();
