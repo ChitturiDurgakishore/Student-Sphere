@@ -25,21 +25,22 @@
     <div id="auth-section">
       <button id="auth-btn">Authenticate with Google</button>
     </div>
+
     <div id="name-section" class="hidden">
       <h2>Enter Your Name</h2>
       <input type="text" id="name-input" placeholder="Enter your name" />
       <button id="submit-name-btn">Submit</button>
     </div>
+
     <div id="upload-section" class="hidden">
       <h2>Upload Your Study Material</h2>
-      <label for="subject-select">Choose Subject:</label>
-      <select id="subject-select">
-        <option value="Math">Math</option>
-        <option value="Science">Science</option>
-        <option value="English">English</option>
-      </select>
-      <input type="file" id="file-input" accept="application/pdf">
+      <input type="file" id="file-input">
       <button id="upload-btn">Upload File</button>
+    </div>
+
+    <div id="file-list" class="file-list-section hidden">
+      <h3>Your Uploaded Files:</h3>
+      <!-- Files will be displayed here -->
     </div>
   </main>
   <footer>
