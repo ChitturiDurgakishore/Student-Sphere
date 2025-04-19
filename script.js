@@ -3,7 +3,7 @@ let googleAccountsClient;
 let accessToken = null;
 let userName = "";
 
-// This gets called ONLY after Google's script is loaded
+// Define the onGoogleScriptLoad function here
 function onGoogleScriptLoad() {
     console.log("Google API script loaded");
 
@@ -40,8 +40,8 @@ function onGoogleScriptLoad() {
     document.getElementById("upload-btn").addEventListener("click", uploadFile);
 }
 
+// Function to fetch and display PDF links for a subject
 function getPDFs() {
-    // Assuming PDFs are stored by subject in some collection
     const subjects = ["ATCD", "CV", "DT", "ML", "FIOT"];
     const subjectList = document.getElementById("subject-list");
     subjectList.innerHTML = "";
@@ -56,8 +56,8 @@ function getPDFs() {
     document.getElementById("get-pdfs-section").classList.remove("hidden");
 }
 
+// Function to show PDF links for a selected subject
 function showPDFLinks(subject) {
-    // Fetch PDF links from Google Drive or a database
     const pdfLinks = [
         { name: "Sample PDF 1", uploader: "User1", url: "https://drive.google.com/1" },
         { name: "Sample PDF 2", uploader: "User2", url: "https://drive.google.com/2" },
@@ -74,6 +74,7 @@ function showPDFLinks(subject) {
     document.getElementById("get-pdfs-section").appendChild(pdfList);
 }
 
+// Function to handle file upload
 function uploadFile() {
     const fileInput = document.getElementById("file-input");
     const file = fileInput.files[0];
