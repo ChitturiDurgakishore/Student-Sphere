@@ -59,8 +59,8 @@ function getPDFs() {
 // Function to show PDF links for a selected subject
 function showPDFLinks(subject) {
     const pdfLinks = [
-        { name: "Sample PDF 1", uploader: "User1", url: "https://drive.google.com/1" },
-        { name: "Sample PDF 2", uploader: "User2", url: "https://drive.google.com/2" },
+        { name: "Sample PDF 1", uploader: "User1", url: "https://drive.google.com/file/d/1aRo7wlukgcNlc2dl9qZCtZPVG5wcapel/view?usp=drivesdk" },
+        { name: "Sample PDF 2", uploader: "User2", url: "https://drive.google.com/file/d/1aRo7wlukgcNlc2dl9qZCtZPVG5wcapel/view?usp=drivesdk" },
     ];
 
     const pdfList = document.createElement("ul");
