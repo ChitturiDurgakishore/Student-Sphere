@@ -86,28 +86,45 @@ function uploadFile() {
 function storeFileMetadata(fileName, subject, fileLink) {
     fetch(sheetsAPIUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({ fileName, subject, fileLink })
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
-        console.log("File metadata saved:", data);
+        console.log("File metadata stored successfully:", data);
         alert("File metadata stored in Google Sheets!");
     })
-    .catch(error => console.error("Error storing metadata:", error));
+    .catch(error => {
+        console.error("Error storing metadata:", error);
+        alert("Metadata storage failed. Check console logs.");
+    });
 }
 
 // Function to Retrieve Files from Google Sheets
 function getFiles() {
-    fetch(sheetsAPIUrl)
+    fetch(sheetsAPIUrl, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+    })
     .then(response => response.json())
     .then(data => {
+        console.log("Fetched data:", data); // Debugging log
         let subjectList = document.getElementById("subject-list");
         subjectList.innerHTML = "";
+
+        if (data.length === 0) {
+            subjectList.innerHTML = "<p>No PDFs available yet.</p>";
+            return;
+        }
 
         data.forEach(file => {
             subjectList.innerHTML += `<li>${file.subject}: <a href="${file.fileLink}" target="_blank">${file.fileName}</a></li>`;
         });
     })
-    .catch(error => console.error("Error fetching files:", error));
+    .catch(error => {
+        console.error("Error fetching files:", error);
+        alert("Failed to fetch study materials.");
+    });
 }
