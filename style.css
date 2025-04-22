@@ -46,14 +46,7 @@ button:hover {
   background-color: #45a049;
 }
 
-button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-input[type="text"],
-input[type="file"],
-select {
+input[type="text"], input[type="file"], select {
   padding: 0.5rem;
   font-size: 1rem;
   border: 1px solid #ddd;
@@ -69,14 +62,4 @@ ul {
 
 ul li {
   margin: 1rem 0;
-}
-
-footer {
-  background-color: #4CAF50;
-  color: white;
-  padding: 1rem 0;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  text-align: center;
 }
