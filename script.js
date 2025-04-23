@@ -100,7 +100,7 @@ function uploadFile() {
 function storeFileMetadata(fileName, subject, fileLink) {
   console.log("Storing metadata:", fileName, subject, fileLink);
 
-  fetch("YOUR_WEB_APP_URL_HERE", {
+  fetch("https://script.google.com/macros/s/AKfycbx9nu2WNokgsCYo1_StyZHyoWoC9R8rOi25fXjtS5z4K9MA-Vx7jZz0WiSNhLp0C0w/exec", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
