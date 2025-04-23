@@ -1,6 +1,6 @@
 // Replace these with your actual credentials
 const clientID = "479563869562-d4frmm9dfvajlv2ntb4u9i8vm2jmuthr.apps.googleusercontent.com"; // Replace this
-const sheetsAPIUrl = "https://script.google.com/macros/s/AKfycbwdMwADldN2GZUriQW1Lvtr6AI4-55HixOg8UPQqvlZDTAJWEXemQUY3oOdDmMQCaA/exec"; // Replace this
+const sheetsAPIUrl = "https://script.google.com/macros/s/AKfycbyncWun5r41e4_q3kvD_rRG28_PZ3abJMpi8hdK1K1DzJF7SgXW-cJqZiR976p2KNY/exec"; // Replace this
 let accessToken = null;
 let userName = "";
 
