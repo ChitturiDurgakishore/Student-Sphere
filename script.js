@@ -1,6 +1,6 @@
 // Replace these with your actual credentials
 const clientID = "479563869562-d4frmm9dfvajlv2ntb4u9i8vm2jmuthr.apps.googleusercontent.com"; // Replace this
-const sheetsAPIUrl = "https://script.google.com/macros/s/AKfycbyFvx_xJHQUIQTRlCs2-V_a93UOvSN3oMhnBUVBwGGqZEc81QOrtRm1ZPbDCdaQcXU/exec"; // Replace this
+const sheetsAPIUrl = "https://script.google.com/macros/s/AKfycbx9nu2WNokgsCYo1_StyZHyoWoC9R8rOi25fXjtS5z4K9MA-Vx7jZz0WiSNhLp0C0w/exec"; // Replace this
 let accessToken = null;
 let userName = "";
 
@@ -98,29 +98,30 @@ function uploadFile() {
 }
 // Function to Store Metadata in Google Sheets
 function storeFileMetadata(fileName, subject, fileLink) {
-    console.log("Storing metadata:", fileName, subject, fileLink); // Debugging log
+  console.log("Storing metadata:", fileName, subject, fileLink);
 
-    fetch(sheetsAPIUrl, {
-        method: "POST",
-        headers: { 
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ fileName, subject, fileLink })
+  fetch("YOUR_WEB_APP_URL_HERE", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      fileName: fileName,
+      subject: subject,
+      fileLink: fileLink
     })
-    .then(response => {
-        console.log("Metadata Storage Raw Response:", response.status); // Debugging log
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
+  })
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to store metadata");
+      return res.json();
     })
     .then(data => {
-        console.log("Metadata successfully stored:", data);
-        alert("File metadata stored in Google Sheets!");
+      console.log("Metadata stored:", data);
+      alert("PDF uploaded and metadata stored!");
     })
     .catch(error => {
-        console.error("Error storing metadata:", error);
-        alert("Metadata storage failed. Check console logs.");
+      console.error("Error storing metadata:", error);
+      alert("Upload succeeded but failed to update sheet.");
     });
 }
 
