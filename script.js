@@ -102,7 +102,9 @@ function storeFileMetadata(fileName, subject, fileLink) {
 
     fetch(sheetsAPIUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({ fileName, subject, fileLink })
     })
     .then(response => {
