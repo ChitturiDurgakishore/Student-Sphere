@@ -52,17 +52,17 @@ function uploadFile() {
     let subject = document.getElementById("subject-select").value;
 
     if (!file) {
-        alert("Please select a file to upload.");
+        alert("Please select a file.");
         return;
     }
-    if (!accessToken) {
-        alert("Authentication error! No access token found.");
-        console.error("Missing access token. Ensure authentication runs first.");
+    if (!accessToken || typeof accessToken !== "string") {
+        alert("Authentication error! Access token missing.");
+        console.error("Access token is undefined. Try logging in again.");
         return;
     }
 
     console.log("Uploading file:", file.name);
-    console.log("Using Access Token:", accessToken); // Debugging authentication
+    console.log("Using Access Token:", accessToken);
 
     let metadata = { name: file.name, mimeType: file.type };
     let formData = new FormData();
@@ -72,12 +72,12 @@ function uploadFile() {
     fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", {
         method: "POST",
         headers: { 
-            Authorization: `Bearer ${accessToken}` // No need for Content-Type here
+            Authorization: `Bearer ${accessToken}`
         },
         body: formData
     })
     .then(response => {
-        console.log("Raw Response Status:", response.status); // Debugging log
+        console.log("Raw API Response:", response.status); // Debugging log
         return response.json();
     })
     .then(data => {
@@ -85,17 +85,15 @@ function uploadFile() {
         if (data.id) {
             let fileLink = `https://drive.google.com/file/d/${data.id}/view`;
             alert("File uploaded successfully!");
-
-            // Store metadata in Google Sheets
             storeFileMetadata(file.name, subject, fileLink);
         } else {
-            alert("File upload failed! Check API response.");
             console.error("Upload Error:", data);
+            alert("File upload failed! Check API response.");
         }
     })
     .catch(error => {
         console.error("Error uploading file:", error);
-        alert("File upload failed. Check console logs for details.");
+        alert("File upload failed.");
     });
 }
 // Function to Store Metadata in Google Sheets
