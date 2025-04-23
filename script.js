@@ -8,9 +8,16 @@ let userName = "";
 function onGoogleScriptLoad() {
     googleAccountsClient = google.accounts.oauth2.initTokenClient({
         client_id: clientID,
-        scope: "https://www.googleapis.com/auth/drive.file",
+        scope: "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.metadata",
         callback: (tokenResponse) => {
             accessToken = tokenResponse.access_token;
+            console.log("Access Token:", accessToken); // Debugging: Log the token
+
+            if (!accessToken) {
+                alert("Failed to authenticate. Please try again.");
+                return;
+            }
+            
             alert("User authenticated successfully!");
             document.getElementById("name-section").classList.remove("hidden");
         }
@@ -49,9 +56,13 @@ function uploadFile() {
         return;
     }
     if (!accessToken) {
-        alert("Please authenticate first.");
+        alert("Authentication error! No access token found.");
+        console.error("Missing access token. Ensure authentication runs first.");
         return;
     }
+
+    console.log("Uploading file:", file.name);
+    console.log("Using Access Token:", accessToken); // Debugging authentication
 
     let metadata = { name: file.name, mimeType: file.type };
     let formData = new FormData();
@@ -60,11 +71,17 @@ function uploadFile() {
 
     fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", {
         method: "POST",
-        headers: { Authorization: `Bearer ${accessToken}` },
+        headers: { 
+            Authorization: `Bearer ${accessToken}` // No need for Content-Type here
+        },
         body: formData
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log("Raw Response Status:", response.status); // Debugging log
+        return response.json();
+    })
     .then(data => {
+        console.log("Upload Response:", data);
         if (data.id) {
             let fileLink = `https://drive.google.com/file/d/${data.id}/view`;
             alert("File uploaded successfully!");
@@ -78,10 +95,9 @@ function uploadFile() {
     })
     .catch(error => {
         console.error("Error uploading file:", error);
-        alert("File upload failed.");
+        alert("File upload failed. Check console logs for details.");
     });
 }
-
 // Function to Store Metadata in Google Sheets
 function storeFileMetadata(fileName, subject, fileLink) {
     fetch(sheetsAPIUrl, {
