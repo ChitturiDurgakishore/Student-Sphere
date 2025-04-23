@@ -98,16 +98,22 @@ function uploadFile() {
 }
 // Function to Store Metadata in Google Sheets
 function storeFileMetadata(fileName, subject, fileLink) {
+    console.log("Storing metadata:", fileName, subject, fileLink); // Debugging log
+
     fetch(sheetsAPIUrl, {
         method: "POST",
-        headers: { 
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ fileName, subject, fileLink })
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log("Metadata Storage Raw Response:", response.status); // Debugging log
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
-        console.log("File metadata stored successfully:", data);
+        console.log("Metadata successfully stored:", data);
         alert("File metadata stored in Google Sheets!");
     })
     .catch(error => {
