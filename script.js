@@ -17,7 +17,7 @@ function onGoogleScriptLoad() {
                 alert("Failed to authenticate. Please try again.");
                 return;
             }
-            
+
             alert("User authenticated successfully!");
             document.getElementById("name-section").classList.remove("hidden");
         }
@@ -96,36 +96,42 @@ function uploadFile() {
         alert("File upload failed.");
     });
 }
-// Function to Store Metadata in Google Sheets
-function storeFileMetadata(fileName, subject, fileLink) {
-  console.log("Storing metadata:", fileName, subject, fileLink);
 
-  fetch("https://script.google.com/macros/s/AKfycbx9nu2WNokgsCYo1_StyZHyoWoC9R8rOi25fXjtS5z4K9MA-Vx7jZz0WiSNhLp0C0w/exec", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      fileName: fileName,
-      subject: subject,
-      fileLink: fileLink
+// Function to Store Metadata in Database (PHP Backend)
+function storeFileMetadata(fileName, subject, fileLink) {
+    console.log("Storing metadata to database:", fileName, subject, fileLink);
+
+    // Get today's date
+    const today = new Date().toISOString().split('T')[0];
+
+    fetch("upload_link.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            subject: subject,
+            uploadDate: today,
+            link: fileLink,
+            uploadedBy: userName
+        })
     })
-  })
-    .then(res => {
-      if (!res.ok) throw new Error("Failed to store metadata");
-      return res.json();
-    })
+    .then(res => res.json())
     .then(data => {
-      console.log("Metadata stored:", data);
-      alert("PDF uploaded and metadata stored!");
+        console.log("Server Response:", data);
+        if (data.status === "success") {
+            alert("PDF uploaded and saved to database!");
+        } else {
+            alert("PDF uploaded but failed to save metadata.");
+        }
     })
     .catch(error => {
-      console.error("Error storing metadata:", error);
-      alert("Upload succeeded but failed to update sheet.");
+        console.error("Error storing metadata:", error);
+        alert("Upload succeeded but failed to save data.");
     });
 }
 
-// Function to Retrieve Files from Google Sheets
+// Function to Retrieve Files from Google Sheets (or Database)
 function getFiles() {
     fetch(sheetsAPIUrl, {
         method: "GET",
