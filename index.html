@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Material Sharing</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="script.js" defer></script> <!-- Link to the JavaScript file -->
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="container">
-        <!-- Authentication Section -->
         <section id="auth-section">
             <button id="auth-btn" class="auth-btn">Login with Google</button>
         </section>
-
-        <!-- Name Input Section -->
         <section id="name-section" class="hidden">
             <h2>Enter your name</h2>
             <input type="text" id="name-input" placeholder="Your Name" />
             <button id="name-submit">Submit</button>
         </section>
-
-        <!-- Home Section -->
         <section id="home-section" class="hidden">
             <h2>Welcome, <span id="user-name"></span>!</h2>
             <div class="button-group">
@@ -31,8 +25,6 @@
                 <button id="upload-pdfs-btn" class="btn">Upload PDFs</button>
             </div>
         </section>
-
-        <!-- File Upload Section -->
         <section id="upload-section" class="hidden">
             <h3>Select subject and upload a file</h3>
             <select id="subject-select">
@@ -45,8 +37,6 @@
             <input type="file" id="file-input" />
             <button id="upload-btn" class="btn">Upload</button>
         </section>
-
-        <!-- List of PDFs -->
         <section id="pdf-list-section">
             <ul id="subject-list"></ul>
         </section>
