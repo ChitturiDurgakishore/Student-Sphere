@@ -1,65 +1,96 @@
-/* Global styles */
+/* General Styles */
 body {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f5f5f5;
-  text-align: center;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #FFB6C1, #FFD700);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-header {
-  background-color: #4CAF50;
-  color: white;
-  padding: 1.5rem 0;
-  font-size: 2rem;
-  text-transform: uppercase;
-  font-weight: bold;
+.container {
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-main {
-  margin: 2rem auto;
-  width: 90%;
-  max-width: 600px;
-  padding: 1rem;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+h2, h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
-.hidden {
-  display: none;
+input[type="text"], select, input[type="file"] {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+    max-width: 300px;
 }
 
 button {
-  margin: 1rem;
-  padding: 0.8rem 1.5rem;
-  font-size: 1.1rem;
-  color: white;
-  background-color: #4CAF50;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.auth-btn {
+    background-color: #34a853;
+    color: white;
+}
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
 }
 
 button:hover {
-  background-color: #45a049;
+    opacity: 0.8;
 }
 
-input[type="text"], input[type="file"], select {
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  width: 100%;
-  margin-bottom: 1rem;
+/* Hidden Class */
+.hidden {
+    display: none;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+/* Subject List Styles */
+#subject-list {
+    list-style-type: none;
+    padding: 0;
 }
 
-ul li {
-  margin: 1rem 0;
+#subject-list li {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+#subject-list a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#subject-list a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+    
+    input[type="text"], select, input[type="file"] {
+        width: 100%;
+    }
 }
