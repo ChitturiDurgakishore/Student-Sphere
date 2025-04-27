@@ -22,7 +22,7 @@ $link = $data['link'];
 $uploadedBy = $data['uploadedBy'];
 
 // Prepare SQL
-$sql = "INSERT INTO File_links (Subject, UploadeDate, Link, UploadedBy) 
+$sql = "INSERT INTO File_links (Subject, UploadDate, Link, UploadedBy) 
         VALUES (?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
