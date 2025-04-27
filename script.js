@@ -71,11 +71,18 @@ function uploadFile() {
     let file = document.getElementById("file-input").files[0];
     let subject = document.getElementById("subject-select").value;
 
-    if (!file) return alert("Please select a file.");
+    if (!file) {
+        alert("Please select a file.");
+        return;
+    }
+    if (!accessToken) {
+        alert("Authentication error! Access token missing.");
+        return;
+    }
 
     let metadata = { name: file.name, mimeType: file.type };
     let formData = new FormData();
-    formData.append("metadata", JSON.stringify(metadata));
+    formData.append("metadata", new Blob([JSON.stringify(metadata)], { type: "application/json" }));
     formData.append("file", file);
 
     fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", {
@@ -85,11 +92,18 @@ function uploadFile() {
     })
     .then(response => response.json())
     .then(data => {
-        let fileLink = `https://drive.google.com/file/d/${data.id}/view`;
-        alert("File uploaded!");
-        storeFileMetadata(file.name, subject, fileLink);
+        if (data.id) {
+            let fileLink = `https://drive.google.com/file/d/${data.id}/view`;
+            alert("File uploaded successfully!");
+            storeFileMetadata(file.name, subject, fileLink);
+        } else {
+            alert("File upload failed!");
+        }
     })
-    .catch(error => console.error("Error uploading file:", error));
+    .catch(error => {
+        console.error("Error uploading file:", error);
+        alert("File upload failed.");
+    });
 }
 
 function storeFileMetadata(fileName, subject, fileLink) {
