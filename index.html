@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Study Material Sharing App</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://accounts.google.com/gsi/client" onload="onGoogleScriptLoad()" async defer></script>
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Material Sharing</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="app.js" defer></script> <!-- Link to the JavaScript file -->
 </head>
 <body>
-  <header>
-    <h1>Study Material Sharing App</h1>
-  </header>
+    <div class="container">
+        <!-- Authentication Section -->
+        <section id="auth-section">
+            <button id="auth-btn" class="auth-btn">Login with Google</button>
+        </section>
 
-  <main>
-    <div id="auth-section">
-      <button id="auth-btn">Authenticate with Google</button>
+        <!-- Name Input Section -->
+        <section id="name-section" class="hidden">
+            <h2>Enter your name</h2>
+            <input type="text" id="name-input" placeholder="Your Name" />
+            <button id="name-submit">Submit</button>
+        </section>
+
+        <!-- Home Section -->
+        <section id="home-section" class="hidden">
+            <h2>Welcome, <span id="user-name"></span>!</h2>
+            <div class="button-group">
+                <button id="get-pdfs-btn" class="btn">Get PDFs</button>
+                <button id="upload-pdfs-btn" class="btn">Upload PDFs</button>
+            </div>
+        </section>
+
+        <!-- File Upload Section -->
+        <section id="upload-section" class="hidden">
+            <h3>Select subject and upload a file</h3>
+            <select id="subject-select">
+                <option value="ATCD">ATCD</option>
+                <option value="CV">CV</option>
+                <option value="DT">DT</option>
+                <option value="ML">ML</option>
+                <option value="FIOT">FIOT</option>
+            </select>
+            <input type="file" id="file-input" />
+            <button id="upload-btn" class="btn">Upload</button>
+        </section>
+
+        <!-- List of PDFs -->
+        <section id="pdf-list-section">
+            <ul id="subject-list"></ul>
+        </section>
     </div>
-
-    <div id="name-section" class="hidden">
-      <label for="name-input">Enter your name:</label>
-      <input type="text" id="name-input" placeholder="Enter your name" />
-      <button id="name-submit">Submit</button>
-    </div>
-
-    <div id="home-section" class="hidden">
-      <button id="get-pdfs-btn">Get PDFs</button>
-      <button id="upload-pdfs-btn">Upload PDFs</button>
-    </div>
-
-    <div id="get-pdfs-section" class="hidden">
-      <h2>Select Subject</h2>
-      <ul id="subject-list">
-        <!-- Dynamically populated -->
-      </ul>
-    </div>
-
-    <div id="upload-section" class="hidden">
-      <h2>Upload Your Study Material</h2>
-      <label for="subject-select">Choose Subject:</label>
-      <select id="subject-select">
-        <option value="ATCD">ATCD</option>
-        <option value="CV">CV</option>
-        <option value="DT">DT</option>
-        <option value="ML">ML</option>
-        <option value="FIOT">FIOT</option>
-      </select>
-      <input type="file" id="file-input" />
-      <button id="upload-btn">Upload PDF</button>
-    </div>
-
-  </main>
 </body>
 </html>
