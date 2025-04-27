@@ -34,6 +34,7 @@ document.getElementById("name-submit").addEventListener("click", () => {
     if (userName) {
         document.getElementById("name-section").classList.add("hidden");
         document.getElementById("home-section").classList.remove("hidden");
+        document.getElementById("user-name").textContent = userName;
     } else {
         alert("Please enter your name.");
     }
